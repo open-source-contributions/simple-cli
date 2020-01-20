@@ -23,13 +23,13 @@ abstract class TestCase extends FrameworkTestCase
         $actualOutput = ob_get_contents();
         ob_end_clean();
 
-        static::assertSame($expectedOutput, $actualOutput, "Output should be: $expectedOutput");
+        self::assertSame($expectedOutput, $actualOutput, "Output should be: $expectedOutput");
     }
 
     public static function assertFileContentEquals($expected, $file, $message = null)
     {
         $message = "$file content should mismatch.".($message ? "\n$message" : '');
 
-        static::assertSame($expected, str_replace("\r", '', file_get_contents($file) ?: ''), $message);
+        self::assertSame($expected, str_replace("\r", '', file_get_contents($file) ?: ''), $message);
     }
 }

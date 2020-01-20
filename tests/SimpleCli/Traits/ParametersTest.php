@@ -20,11 +20,11 @@ class ParametersTest extends TraitsTestCase
 
         $command('hello');
 
-        static::assertSame([], $command->getParameters());
+        self::assertSame([], $command->getParameters());
 
         $command('hello', 'foobar', 'A', 'B', 'C');
 
-        static::assertSame(['A', 'B', 'C'], $command->getParameters());
+        self::assertSame(['A', 'B', 'C'], $command->getParameters());
     }
 
     /**
@@ -34,7 +34,7 @@ class ParametersTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertSame(
+        self::assertSame(
             42,
             $command->getParameterValue(
                 '42',
@@ -45,7 +45,7 @@ class ParametersTest extends TraitsTestCase
             )
         );
 
-        static::assertSame(
+        self::assertSame(
             42,
             $command->getParameterValue(
                 '42.5',
@@ -56,7 +56,7 @@ class ParametersTest extends TraitsTestCase
             )
         );
 
-        static::assertSame(
+        self::assertSame(
             42.5,
             $command->getParameterValue(
                 '42.5',
@@ -77,8 +77,8 @@ class ParametersTest extends TraitsTestCase
             $this->markTestSkipped('settype() can no longer be muted since PHP 8.');
         }
 
-        static::expectException(InvalidArgumentException::class);
-        static::expectExceptionMessage('Cannot cast arrrg to special');
+        self::expectException(InvalidArgumentException::class);
+        self::expectExceptionMessage('Cannot cast arrrg to special');
 
         $command = new DemoCli();
 
@@ -96,8 +96,8 @@ class ParametersTest extends TraitsTestCase
      */
     public function testGetParameterValueWrongValue()
     {
-        static::expectException(InvalidArgumentException::class);
-        static::expectExceptionMessage(
+        self::expectException(InvalidArgumentException::class);
+        self::expectExceptionMessage(
             "The parameter myProp must be one of the following values: [42.5, 1]; '42' given."
         );
 

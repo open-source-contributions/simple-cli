@@ -19,6 +19,6 @@ class CommandTest extends TraitsTestCase
 
         $command('foobar', 'foobar');
 
-        static::assertSame('foobar', $command->getCommand());
+        self::assertSame('foobar', $command->getCommand());
     }
 }

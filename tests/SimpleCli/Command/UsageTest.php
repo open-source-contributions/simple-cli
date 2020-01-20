@@ -15,7 +15,7 @@ class UsageTest extends TestCase
      */
     public function testRun()
     {
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;33mUsage:
 [ESCAPE][0m  file [command] [options] [arguments]
 

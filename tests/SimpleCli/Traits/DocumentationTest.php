@@ -18,9 +18,9 @@ class DocumentationTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertSame('This is a demo.', $command->extractClassNameDescription(DemoCommand::class));
-        static::assertSame('stdClass', $command->extractClassNameDescription(stdClass::class));
-        static::assertSame('NotFound', $command->extractClassNameDescription('NotFound'));
+        self::assertSame('This is a demo.', $command->extractClassNameDescription(DemoCommand::class));
+        self::assertSame('stdClass', $command->extractClassNameDescription(stdClass::class));
+        self::assertSame('NotFound', $command->extractClassNameDescription('NotFound'));
     }
 
     /**
@@ -33,7 +33,7 @@ class DocumentationTest extends TraitsTestCase
 
         $command('file', 'foobar');
 
-        static::assertSame(
+        self::assertSame(
             'hello, hi, bye',
             array_values(
                 array_filter(
@@ -56,7 +56,7 @@ class DocumentationTest extends TraitsTestCase
 
         $command('file', 'foobar');
 
-        static::assertSame(
+        self::assertSame(
             'Append a prefix to $sentence.',
             array_values(
                 array_filter(
@@ -79,7 +79,7 @@ class DocumentationTest extends TraitsTestCase
 
         $command('file', 'foobar');
 
-        static::assertSame(
+        self::assertSame(
             ['prefix', 'p'],
             array_values(
                 array_filter(
@@ -91,7 +91,7 @@ class DocumentationTest extends TraitsTestCase
             )[0]['names']
         );
 
-        static::assertSame(
+        self::assertSame(
             'Sentence to display.',
             array_values(
                 array_filter(
@@ -105,7 +105,7 @@ class DocumentationTest extends TraitsTestCase
 
         $command('file', 'create');
 
-        static::assertSame('classNames', $command->getExpectedRestArgument()['property']);
+        self::assertSame('classNames', $command->getExpectedRestArgument()['property']);
     }
 
     /**
@@ -113,14 +113,14 @@ class DocumentationTest extends TraitsTestCase
      */
     public function testAddExpectationCast()
     {
-        static::assertOutput(
+        self::assertOutput(
             "9\nA|B|C\n",
             function () {
                 $command = new DemoCli();
 
                 $command('file', 'all', 'A', 'B', 'C');
 
-                static::assertSame('string', $command->getExpectedRestArgument()['type']);
+                self::assertSame('string', $command->getExpectedRestArgument()['type']);
             }
         );
     }
@@ -130,7 +130,7 @@ class DocumentationTest extends TraitsTestCase
      */
     public function testAddExpectationInvalidKind()
     {
-        static::assertOutput(
+        self::assertOutput(
             'A property cannot be both @option and @argument',
             function () {
                 $command = new DemoCli();
@@ -146,7 +146,7 @@ class DocumentationTest extends TraitsTestCase
      */
     public function testExtractExpectations()
     {
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;31mUnknown --foo option[ESCAPE][0m',
             function () {
                 $command = new DemoCli();
@@ -155,7 +155,7 @@ class DocumentationTest extends TraitsTestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             "12\n\n",
             function () {
                 $command = new DemoCli();
@@ -164,7 +164,7 @@ class DocumentationTest extends TraitsTestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             "12\n\n",
             function () {
                 $command = new DemoCli();
@@ -173,7 +173,7 @@ class DocumentationTest extends TraitsTestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             "hi\n",
             function () {
                 $command = new DemoCli();

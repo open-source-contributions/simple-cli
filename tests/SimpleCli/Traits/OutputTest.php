@@ -16,14 +16,14 @@ class OutputTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertOutput(
+        self::assertOutput(
             'Hello world',
             function () use ($command) {
                 $command->write('Hello world');
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             '',
             function () use ($command) {
                 $command->mute();
@@ -31,7 +31,7 @@ class OutputTest extends TraitsTestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;31mHello world[ESCAPE][0m',
             function () use ($command) {
                 $command->unmute();
@@ -47,14 +47,14 @@ class OutputTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertOutput(
+        self::assertOutput(
             "Hello world\n",
             function () use ($command) {
                 $command->writeLine('Hello world');
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             '',
             function () use ($command) {
                 $command->mute();
@@ -62,7 +62,7 @@ class OutputTest extends TraitsTestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             "[ESCAPE][0;31mHello world\n[ESCAPE][0m",
             function () use ($command) {
                 $command->unmute();
@@ -79,23 +79,23 @@ class OutputTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertSame(
+        self::assertSame(
             'Hello world',
             $command->colorize('Hello world')
         );
-        static::assertSame(
+        self::assertSame(
             'Hello world',
             $command->colorize('Hello world', null, null)
         );
-        static::assertSame(
+        self::assertSame(
             '[ESCAPE][41mHello world[ESCAPE][0m',
             $command->colorize('Hello world', null, 'red')
         );
-        static::assertSame(
+        self::assertSame(
             '[ESCAPE][0;34mHello world[ESCAPE][0m',
             $command->colorize('Hello world', 'blue')
         );
-        static::assertSame(
+        self::assertSame(
             '[ESCAPE][0;34m[ESCAPE][43mHello world[ESCAPE][0m',
             $command->colorize('Hello world', 'blue', 'yellow')
         );
@@ -109,18 +109,18 @@ class OutputTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertSame(
+        self::assertSame(
             '[ESCAPE][0;34m[ESCAPE][43mHello world[ESCAPE][0m',
             $command->colorize('Hello world', 'blue', 'yellow')
         );
 
         $command->disableColors();
 
-        static::assertSame('Hello world', $command->colorize('Hello world', 'blue', 'yellow'));
+        self::assertSame('Hello world', $command->colorize('Hello world', 'blue', 'yellow'));
 
         $command->enableColors();
 
-        static::assertSame(
+        self::assertSame(
             '[ESCAPE][0;34m[ESCAPE][43mHello world[ESCAPE][0m',
             $command->colorize('Hello world', 'blue', 'yellow')
         );
@@ -133,14 +133,14 @@ class OutputTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertSame(
+        self::assertSame(
             '[ESCAPE][41mHello world[ESCAPE][0m',
             $command->colorize('Hello world', null, 'red')
         );
 
         $command->setEscapeCharacter('#');
 
-        static::assertSame(
+        self::assertSame(
             '#[41mHello world#[0m',
             $command->colorize('Hello world', null, 'red')
         );
@@ -153,7 +153,7 @@ class OutputTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertSame(
+        self::assertSame(
             '[ESCAPE][0;31m[ESCAPE][41mHello world[ESCAPE][0m',
             $command->colorize('Hello world', 'red', 'red')
         );
@@ -167,7 +167,7 @@ class OutputTest extends TraitsTestCase
             ]
         );
 
-        static::assertSame(
+        self::assertSame(
             '[ESCAPE][abm[ESCAPE][xymHello world[ESCAPE][0m',
             $command->colorize('Hello world', 'red', 'red')
         );
@@ -180,7 +180,7 @@ class OutputTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertOutput(
+        self::assertOutput(
             'Hello world[ESCAPE][11D[ESCAPE][3D',
             function () use ($command) {
                 $command->write('Hello world');
@@ -191,7 +191,7 @@ class OutputTest extends TraitsTestCase
 
         $command = new DemoCli();
 
-        static::assertOutput(
+        self::assertOutput(
             'Hello world',
             function () use ($command) {
                 $command->write('Hello world');
@@ -209,7 +209,7 @@ class OutputTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertOutput(
+        self::assertOutput(
             'Hello world[ESCAPE][11DBye',
             function () use ($command) {
                 $command->write('Hello world');
@@ -225,7 +225,7 @@ class OutputTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertOutput(
+        self::assertOutput(
             "Hello world\n\rBye",
             function () use ($command) {
                 $command->writeLine('Hello world');
@@ -244,22 +244,22 @@ class OutputTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertFalse($command->isMuted());
+        self::assertFalse($command->isMuted());
 
         $command->setMuted(true);
 
-        static::assertTrue($command->isMuted());
+        self::assertTrue($command->isMuted());
 
         $command->setMuted(false);
 
-        static::assertFalse($command->isMuted());
+        self::assertFalse($command->isMuted());
 
         $command->mute();
 
-        static::assertTrue($command->isMuted());
+        self::assertTrue($command->isMuted());
 
         $command->unmute();
 
-        static::assertFalse($command->isMuted());
+        self::assertFalse($command->isMuted());
     }
 }

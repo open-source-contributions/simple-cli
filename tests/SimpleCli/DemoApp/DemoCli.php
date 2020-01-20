@@ -41,17 +41,17 @@ class DemoCli extends SimpleCli
      */
     public static function register($callback)
     {
-        static::$registered[] = $callback;
+        self::$registered[] = $callback;
     }
 
     public static function ask($question)
     {
-        return (static::$answerer)($question);
+        return (self::$answerer)($question);
     }
 
     public function setAnswerer($answerer)
     {
-        static::$answerer = $answerer;
+        self::$answerer = $answerer;
     }
 
     /**

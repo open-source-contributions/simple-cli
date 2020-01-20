@@ -21,7 +21,7 @@ class CreateTest extends TestCase
      */
     protected $currentDirectory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -46,7 +46,7 @@ class CreateTest extends TestCase
      */
     public function testCopyBinTemplate()
     {
-        static::assertOutput(
+        self::assertOutput(
             "[ESCAPE][0;36m1 program created.\n[ESCAPE][0m",
             function () {
                 $command = new DemoCli();
@@ -55,7 +55,7 @@ class CreateTest extends TestCase
             }
         );
 
-        static::assertFileContentEquals(
+        self::assertFileContentEquals(
             "#!/usr/bin/env php
 <?php
 
@@ -80,7 +80,7 @@ exit((new \Tests\SimpleCli\DemoApp\DemoCli())(...\$argv) ? 0 : 1);
 ",
             'bin/demo-cli'
         );
-        static::assertFileContentEquals(
+        self::assertFileContentEquals(
             '@ECHO OFF
 setlocal DISABLEDELAYEDEXPANSION
 SET BIN_TARGET=%~dp0/demo-cli
@@ -92,7 +92,7 @@ php "%BIN_TARGET%" %*
         unlink('bin/demo-cli');
         unlink('bin/demo-cli.bat');
 
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][1;36mCreating program for Tests\SimpleCli\DemoApp\DemoCli
 [ESCAPE][0mCreating bin/demo-cli
 Creating bin/demo-cli.bat
@@ -105,7 +105,7 @@ Creating bin/demo-cli.bat
             }
         );
 
-        static::assertFileContentEquals(
+        self::assertFileContentEquals(
             "#!/usr/bin/env php
 <?php
 
@@ -130,7 +130,7 @@ exit((new \Tests\SimpleCli\DemoApp\DemoCli())(...\$argv) ? 0 : 1);
 ",
             'bin/demo-cli'
         );
-        static::assertFileContentEquals(
+        self::assertFileContentEquals(
             '@ECHO OFF
 setlocal DISABLEDELAYEDEXPANSION
 SET BIN_TARGET=%~dp0/demo-cli
@@ -146,7 +146,7 @@ php "%BIN_TARGET%" %*
      */
     public function testRun()
     {
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;31mfoobar class not found
 [ESCAPE][0mPlease check your composer autoload is up to date and allow to load this class.
 [ESCAPE][0;36m0 programs created.
@@ -160,7 +160,7 @@ php "%BIN_TARGET%" %*
 
         $this->fileSystem->remove('bin');
 
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;31mstdClass needs to implement SimpleCli\SimpleCli
 [ESCAPE][0m[ESCAPE][0;36m0 programs created.
 [ESCAPE][0m',
@@ -174,7 +174,7 @@ php "%BIN_TARGET%" %*
         $this->fileSystem->remove('bin');
         touch('bin');
 
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;31mUnable to create the bin directory
 [ESCAPE][0m',
             function () {

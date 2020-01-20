@@ -20,7 +20,7 @@ class WordsListTest extends TestCase
         $words = ['ab', 'bc', 'cd'];
         $wordsList = new WordsList($words);
 
-        static::assertSame($words, $wordsList->getWords());
+        self::assertSame($words, $wordsList->getWords());
     }
 
     /**
@@ -31,8 +31,8 @@ class WordsListTest extends TestCase
         $words = ['ab', 'bc', 'cd'];
         $list = (new WordsList($words))->getArrayIterator();
 
-        static::assertInstanceOf(ArrayIterator::class, $list);
-        static::assertSame($words, iterator_to_array($list));
+        self::assertInstanceOf(ArrayIterator::class, $list);
+        self::assertSame($words, iterator_to_array($list));
     }
 
     /**
@@ -43,8 +43,8 @@ class WordsListTest extends TestCase
         $words = ['ab', 'bc', 'cd'];
         $list = new WordsList($words);
 
-        static::assertInstanceOf(Traversable::class, $list);
-        static::assertSame($words, iterator_to_array($list));
+        self::assertInstanceOf(Traversable::class, $list);
+        self::assertSame($words, iterator_to_array($list));
     }
 
     /**
@@ -55,15 +55,15 @@ class WordsListTest extends TestCase
     {
         $list = new WordsList(['ab', 'bc', 'cd']);
 
-        static::assertSame([], $list->findClosestWords('ef'));
+        self::assertSame([], $list->findClosestWords('ef'));
 
         $list = new WordsList(['update', 'delete', 'create']);
 
-        static::assertSame(['update'], $list->findClosestWords('upgrade'));
+        self::assertSame(['update'], $list->findClosestWords('upgrade'));
 
-        static::assertSame(['update', 'create'], $list->findClosestWords('date'));
+        self::assertSame(['update', 'create'], $list->findClosestWords('date'));
 
-        static::assertSame(['update', 'create', 'delete'], $list->findClosestWords('date', 1));
+        self::assertSame(['update', 'create', 'delete'], $list->findClosestWords('date', 1));
     }
 
     /**
@@ -74,20 +74,20 @@ class WordsListTest extends TestCase
     {
         $list = new WordsList(['ab', 'bc', 'cd']);
 
-        static::assertNull($list->findClosestWord('ef'));
+        self::assertNull($list->findClosestWord('ef'));
 
         $list = new WordsList(['update', 'delete', 'create']);
 
-        static::assertSame('update', $list->findClosestWord('upgrade'));
+        self::assertSame('update', $list->findClosestWord('upgrade'));
 
-        static::assertSame('update', $list->findClosestWord('date'));
+        self::assertSame('update', $list->findClosestWord('date'));
 
-        static::assertSame('update', $list->findClosestWord('date', 1));
+        self::assertSame('update', $list->findClosestWord('date', 1));
 
-        static::assertNull($list->findClosestWord('date', 5));
+        self::assertNull($list->findClosestWord('date', 5));
 
-        static::assertSame('update', $list->findClosestWord('dateup', 5));
+        self::assertSame('update', $list->findClosestWord('dateup', 5));
 
-        static::assertSame('delete', $list->findClosestWord('dellete'));
+        self::assertSame('delete', $list->findClosestWord('dellete'));
     }
 }

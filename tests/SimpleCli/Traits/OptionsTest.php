@@ -21,18 +21,18 @@ class OptionsTest extends TraitsTestCase
 
         $command('file');
 
-        static::assertSame([], $command->getOptions());
+        self::assertSame([], $command->getOptions());
 
         $command = new DemoCli();
         $command->mute();
 
         $command('file');
 
-        static::assertSame([], $command->getOptions());
+        self::assertSame([], $command->getOptions());
 
         $command('file', 'foobar');
 
-        static::assertSame([], $command->getOptions());
+        self::assertSame([], $command->getOptions());
     }
 
     /**
@@ -45,21 +45,21 @@ class OptionsTest extends TraitsTestCase
 
         $command('file');
 
-        static::assertSame([], $command->getExpectedOptions());
+        self::assertSame([], $command->getExpectedOptions());
 
         $command = new DemoCli();
         $command->mute();
 
         $command('file');
 
-        static::assertSame([], $command->getExpectedOptions());
+        self::assertSame([], $command->getExpectedOptions());
 
         $command = new DemoCli();
         $command->mute();
 
         $command('file', 'foobar');
 
-        static::assertSame(
+        self::assertSame(
             [
                 [
                     'property'    => 'prefix',
@@ -106,7 +106,7 @@ class OptionsTest extends TraitsTestCase
 
         $command('file', 'foobar');
 
-        static::assertSame(
+        self::assertSame(
             [
                 'property'    => 'prefix',
                 'names'       => [
@@ -126,8 +126,8 @@ class OptionsTest extends TraitsTestCase
      */
     public function testUnknownOptionName()
     {
-        static::expectException(InvalidArgumentException::class);
-        static::expectExceptionMessage('Unknown --xyz option');
+        self::expectException(InvalidArgumentException::class);
+        self::expectExceptionMessage('Unknown --xyz option');
 
         $command = new DemoCli();
         $command->mute();
@@ -142,8 +142,8 @@ class OptionsTest extends TraitsTestCase
      */
     public function testUnknownOptionAlias()
     {
-        static::expectException(InvalidArgumentException::class);
-        static::expectExceptionMessage('Unknown -x option');
+        self::expectException(InvalidArgumentException::class);
+        self::expectExceptionMessage('Unknown -x option');
 
         $command = new DemoCli();
         $command->mute();
@@ -163,11 +163,11 @@ class OptionsTest extends TraitsTestCase
 
         $command('file', 'foobar');
 
-        static::assertSame([], $command->getOptions());
+        self::assertSame([], $command->getOptions());
 
         $command('file', 'foobar', '-h');
 
-        static::assertSame(
+        self::assertSame(
             [
                 'help' => true,
             ],
@@ -180,7 +180,7 @@ class OptionsTest extends TraitsTestCase
      */
     public function testEnableBooleanOptionOnNonBoolean()
     {
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;31m-p option is not a boolean, so you can\'t use it in a aliases group[ESCAPE][0m',
             function () {
                 $command = new DemoCli();
@@ -195,7 +195,7 @@ class OptionsTest extends TraitsTestCase
      */
     public function testEnableBooleanOptionWithValue()
     {
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;31m-h option is boolean and should not have value[ESCAPE][0m',
             function () {
                 $command = new DemoCli();
@@ -215,7 +215,7 @@ class OptionsTest extends TraitsTestCase
 
         $command('file', 'foobar', '-p=hello');
 
-        static::assertSame(
+        self::assertSame(
             [
                 'prefix' => 'hello',
             ],
@@ -224,7 +224,7 @@ class OptionsTest extends TraitsTestCase
 
         $command('file', 'foobar', '--help', '--prefix', 'hello');
 
-        static::assertSame(
+        self::assertSame(
             [
                 'help'   => true,
                 'prefix' => 'hello',
@@ -240,7 +240,7 @@ class OptionsTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;31mUnable to parse -prefix=hello, maybe you would mean --prefix=hello[ESCAPE][0m',
             function () use ($command) {
                 $command('file', 'foobar', '-prefix=hello');
@@ -251,7 +251,7 @@ class OptionsTest extends TraitsTestCase
 
         $command('file', 'foobar', '-vh');
 
-        static::assertSame(
+        self::assertSame(
             [
                 'verbose' => true,
                 'help'    => true,
@@ -261,7 +261,7 @@ class OptionsTest extends TraitsTestCase
 
         $command('file', 'foobar', '-hv');
 
-        static::assertSame(
+        self::assertSame(
             [
                 'help'    => true,
                 'verbose' => true,
@@ -271,7 +271,7 @@ class OptionsTest extends TraitsTestCase
 
         $command('file', 'foobar', '-p=hi');
 
-        static::assertSame(
+        self::assertSame(
             [
                 'prefix' => 'hi',
             ],
@@ -280,7 +280,7 @@ class OptionsTest extends TraitsTestCase
 
         $command('file', 'foobar', '--prefix=bye');
 
-        static::assertSame(
+        self::assertSame(
             [
                 'prefix' => 'bye',
             ],
@@ -289,7 +289,7 @@ class OptionsTest extends TraitsTestCase
 
         $command('file', 'foobar', '--prefix', 'bye');
 
-        static::assertSame(
+        self::assertSame(
             [
                 'prefix' => 'bye',
             ],

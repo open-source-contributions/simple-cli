@@ -19,7 +19,7 @@ class HelpTest extends TestCase
      */
     public function testDisplayHelp()
     {
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;33mUsage:
 [ESCAPE][0m  file create [options] [<...classNames>]
 
@@ -42,7 +42,7 @@ class HelpTest extends TestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;33mUsage:
 [ESCAPE][0m  file foobar [options] [<sentence>]
 
@@ -65,7 +65,7 @@ class HelpTest extends TestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;33mUsage:
 [ESCAPE][0m  file hall [options] [<...all>]
 

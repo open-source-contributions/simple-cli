@@ -17,10 +17,10 @@ class NameTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertNull($command->getName());
+        self::assertNull($command->getName());
 
         $command = new DummyCli();
 
-        static::assertSame('stupid', $command->getName());
+        self::assertSame('stupid', $command->getName());
     }
 }

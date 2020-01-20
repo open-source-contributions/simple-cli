@@ -19,7 +19,7 @@ class SimpleCliTest extends TestCase
     {
         $command = new DemoCli();
 
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;31mHello world[ESCAPE][0m',
             function () use ($command) {
                 $command->write('Hello world', 'red');
@@ -28,7 +28,7 @@ class SimpleCliTest extends TestCase
 
         $command = new DemoCli(['red' => 'foobar']);
 
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][foobarmHello world[ESCAPE][0m',
             function () use ($command) {
                 $command->write('Hello world', 'red');
@@ -41,7 +41,7 @@ class SimpleCliTest extends TestCase
      */
     public function testGetVersionDetails()
     {
-        static::assertSame('', (new DemoCli())->getVersionDetails());
+        self::assertSame('', (new DemoCli())->getVersionDetails());
     }
 
     /**
@@ -49,7 +49,7 @@ class SimpleCliTest extends TestCase
      */
     public function testGetVersion()
     {
-        static::assertSame('[ESCAPE][0;33munknown[ESCAPE][0m', (new DemoCli())->getVersion());
+        self::assertSame('[ESCAPE][0;33munknown[ESCAPE][0m', (new DemoCli())->getVersion());
     }
 
     /**
@@ -57,7 +57,7 @@ class SimpleCliTest extends TestCase
      */
     public function testParseParameters()
     {
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;33mUsage:
 [ESCAPE][0m  file create [options] [<...classNames>]
 
@@ -80,7 +80,7 @@ class SimpleCliTest extends TestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             "9\n\n",
             function () {
                 $command = new DemoCli();
@@ -89,7 +89,7 @@ class SimpleCliTest extends TestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             "[ESCAPE][0;31m--biz option is not a boolean, so you can't use it in a aliases group[ESCAPE][0m",
             function () {
                 $command = new DemoCli();
@@ -106,7 +106,7 @@ class SimpleCliTest extends TestCase
      */
     public function testGetCommandClass()
     {
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;31mstdClass needs to implement SimpleCli\Command[ESCAPE][0m',
             function () {
                 $command = new BadCli();
@@ -115,7 +115,7 @@ class SimpleCliTest extends TestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;31mCommand ghost not found[ESCAPE][0m',
             function () {
                 $command = new BadCli();
@@ -124,7 +124,7 @@ class SimpleCliTest extends TestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             "9\n\n",
             function () {
                 $command = new DemoCli();
@@ -142,7 +142,7 @@ class SimpleCliTest extends TestCase
      */
     public function testFindClosestCommand()
     {
-        static::assertOutput(
+        self::assertOutput(
             implode(
                 "\n",
                 [
@@ -161,7 +161,7 @@ class SimpleCliTest extends TestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             implode(
                 "\n",
                 [
@@ -177,7 +177,7 @@ class SimpleCliTest extends TestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             implode(
                 "\n",
                 [
@@ -202,7 +202,7 @@ class SimpleCliTest extends TestCase
      */
     public function testCreateCommander()
     {
-        static::assertOutput(
+        self::assertOutput(
             "9\n\n",
             function () {
                 $command = new DemoCli();
@@ -211,7 +211,7 @@ class SimpleCliTest extends TestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             "[ESCAPE][0;31m--biz option is not a boolean, so you can't use it in a aliases group[ESCAPE][0m",
             function () {
                 $command = new DemoCli();
@@ -227,7 +227,7 @@ class SimpleCliTest extends TestCase
      */
     public function testInvoke()
     {
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;33mUsage:
 [ESCAPE][0m  file create [options] [<...classNames>]
 
@@ -250,7 +250,7 @@ class SimpleCliTest extends TestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             "9\n\n",
             function () {
                 $command = new DemoCli();
@@ -259,7 +259,7 @@ class SimpleCliTest extends TestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             "[ESCAPE][0;31m--biz option is not a boolean, so you can't use it in a aliases group[ESCAPE][0m",
             function () {
                 $command = new DemoCli();
@@ -268,7 +268,7 @@ class SimpleCliTest extends TestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             '',
             function () {
                 $command = new DemoCli();

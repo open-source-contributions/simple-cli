@@ -12,7 +12,7 @@ class QuietTest extends TestCase
 {
     public function testIsQuiet()
     {
-        static::assertOutput(
+        self::assertOutput(
             '',
             function () {
                 $command = new DemoCli();
@@ -21,7 +21,7 @@ class QuietTest extends TestCase
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             '[ESCAPE][0;36m0 programs created.
 [ESCAPE][0m',
             function () {

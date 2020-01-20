@@ -19,6 +19,6 @@ class FileTest extends TraitsTestCase
 
         $command('foobar');
 
-        static::assertSame('foobar', $command->getFile());
+        self::assertSame('foobar', $command->getFile());
     }
 }

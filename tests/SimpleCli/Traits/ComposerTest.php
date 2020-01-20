@@ -17,7 +17,7 @@ class ComposerTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertSame('', $command->getPackageName());
+        self::assertSame('', $command->getPackageName());
     }
 
     /**
@@ -27,7 +27,7 @@ class ComposerTest extends TraitsTestCase
     {
         $command = new DemoCli();
 
-        static::assertSame(realpath(__DIR__.'/../../../..'), realpath($command->getVendorDirectory()));
+        self::assertSame(realpath(__DIR__.'/../../../..'), realpath($command->getVendorDirectory()));
     }
 
     /**
@@ -42,7 +42,7 @@ class ComposerTest extends TraitsTestCase
         $command = new DemoCli();
         $command->setVendorDirectory($path);
 
-        static::assertSame($path, $command->getVendorDirectory());
+        self::assertSame($path, $command->getVendorDirectory());
     }
 
     /**
@@ -64,7 +64,7 @@ class ComposerTest extends TraitsTestCase
         @mkdir($vendorDirectory.'/composer');
         file_put_contents($vendorDirectory.'/composer/installed.json', json_encode($packages));
 
-        static::assertSame($packages, $command->getInstalledPackages());
+        self::assertSame($packages, $command->getInstalledPackages());
 
         unlink($vendorDirectory.'/composer/installed.json');
         @rmdir($vendorDirectory.'/composer');
@@ -94,10 +94,10 @@ class ComposerTest extends TraitsTestCase
          * @var InstalledPackage $installedPackage
          */
         $installedPackage = $command->getInstalledPackage('foo/bar');
-        static::assertInstanceOf(InstalledPackage::class, $installedPackage);
-        static::assertSame('foo/bar', $installedPackage->name);
-        static::assertSame('1.2.3', $installedPackage->version);
-        static::assertNull($command->getInstalledPackage('foo/biz'));
+        self::assertInstanceOf(InstalledPackage::class, $installedPackage);
+        self::assertSame('foo/bar', $installedPackage->name);
+        self::assertSame('1.2.3', $installedPackage->version);
+        self::assertNull($command->getInstalledPackage('foo/biz'));
 
         unlink($vendorDirectory.'/composer/installed.json');
         @rmdir($vendorDirectory.'/composer');
@@ -122,8 +122,8 @@ class ComposerTest extends TraitsTestCase
         @mkdir($vendorDirectory.'/composer');
         file_put_contents($vendorDirectory.'/composer/installed.json', json_encode($packages));
 
-        static::assertSame('1.2.3', $command->getInstalledPackageVersion('foo/bar'));
-        static::assertSame('unknown', $command->getInstalledPackageVersion('foo/biz'));
+        self::assertSame('1.2.3', $command->getInstalledPackageVersion('foo/bar'));
+        self::assertSame('unknown', $command->getInstalledPackageVersion('foo/biz'));
 
         unlink($vendorDirectory.'/composer/installed.json');
         @rmdir($vendorDirectory.'/composer');

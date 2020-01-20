@@ -14,7 +14,7 @@ class SimpleCliCommandTest extends TestCase
      */
     public function testGetPackageName()
     {
-        static::assertSame('simple-cli/simple-cli', (new SimpleCliCommand())->getPackageName());
+        self::assertSame('simple-cli/simple-cli', (new SimpleCliCommand())->getPackageName());
     }
 
     /**
@@ -22,6 +22,6 @@ class SimpleCliCommandTest extends TestCase
      */
     public function testGetCommands()
     {
-        static::assertSame(['create' => SimpleCliCommand\Create::class], (new SimpleCliCommand())->getCommands());
+        self::assertSame(['create' => SimpleCliCommand\Create::class], (new SimpleCliCommand())->getCommands());
     }
 }

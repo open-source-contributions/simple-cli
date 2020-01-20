@@ -19,11 +19,11 @@ class ArgumentsTest extends TraitsTestCase
 
         $command('file', 'foobar');
 
-        static::assertSame([], $command->getArguments());
+        self::assertSame([], $command->getArguments());
 
         $command('file', 'foobar', 'My sentence');
 
-        static::assertSame(
+        self::assertSame(
             [
                 'sentence' => 'My sentence',
             ],
@@ -41,11 +41,11 @@ class ArgumentsTest extends TraitsTestCase
 
         $command('file', 'version');
 
-        static::assertSame([], $command->getExpectedArguments());
+        self::assertSame([], $command->getExpectedArguments());
 
         $command('file', 'foobar');
 
-        static::assertSame(
+        self::assertSame(
             [
                 [
                     'property'    => 'sentence',
@@ -68,11 +68,11 @@ class ArgumentsTest extends TraitsTestCase
 
         $command('file', 'foobar', 'My sentence', 'A', 'B');
 
-        static::assertSame([], $command->getRestArguments());
+        self::assertSame([], $command->getRestArguments());
 
         $command('file', 'rest', 'My sentence', 'A', 'B');
 
-        static::assertSame(['A', 'B'], $command->getRestArguments());
+        self::assertSame(['A', 'B'], $command->getRestArguments());
     }
 
     /**
@@ -85,11 +85,11 @@ class ArgumentsTest extends TraitsTestCase
 
         $command('file', 'version');
 
-        static::assertNull($command->getExpectedRestArgument());
+        self::assertNull($command->getExpectedRestArgument());
 
         $command('file', 'rest');
 
-        static::assertSame(
+        self::assertSame(
             [
                 'property'    => 'suffixes',
                 'description' => 'Suffixes after the sentence.',
@@ -108,14 +108,14 @@ class ArgumentsTest extends TraitsTestCase
         $command = new DemoCli();
         $command->disableColors();
 
-        static::assertOutput(
+        self::assertOutput(
             'Expect only 0 arguments',
             function () use ($command) {
                 $command('file', 'version', 'too-argument');
             }
         );
 
-        static::assertOutput(
+        self::assertOutput(
             "Hello world!\n",
             function () use ($command) {
                 $command('file', 'rest', 'Hello', ' world', '!');

@@ -22,17 +22,17 @@ class InputTest extends TraitsTestCase
 
         $command::$registered = [];
 
-        static::invoke($command, 'recordAutocomplete');
+        self::invoke($command, 'recordAutocomplete');
 
-        static::assertSame([[$command, 'autocomplete']], $command::$registered);
+        self::assertSame([[$command, 'autocomplete']], $command::$registered);
 
         $command->setReadlineCompletionExtensions(['this-extension-does-not-exist']);
 
         $command::$registered = [];
 
-        static::invoke($command, 'recordAutocomplete');
+        self::invoke($command, 'recordAutocomplete');
 
-        static::assertSame([], $command::$registered);
+        self::assertSame([], $command::$registered);
     }
 
     /**
@@ -54,7 +54,7 @@ class InputTest extends TraitsTestCase
 
         $command->read('Answer to the Ultimate Question of Life, the Universe, and Everything', ['foo', 'bar', 'biz']);
 
-        static::assertSame(['bar', 'biz'], $command->autocomplete('b'));
+        self::assertSame(['bar', 'biz'], $command->autocomplete('b'));
 
         $command->read(
             'Are you mad?',
@@ -66,7 +66,7 @@ class InputTest extends TraitsTestCase
             }
         );
 
-        static::assertSame(['b??', '42'], $command->autocomplete('b'));
+        self::assertSame(['b??', '42'], $command->autocomplete('b'));
     }
 
     /**
@@ -88,10 +88,10 @@ class InputTest extends TraitsTestCase
 
         $answer = $command->read('Answer to the Ultimate Question of Life, the Universe, and Everything');
 
-        static::assertSame('42', $answer);
+        self::assertSame('42', $answer);
 
         $answer = $command->read('Are you mad?');
 
-        static::assertSame('yes', $answer);
+        self::assertSame('yes', $answer);
     }
 }

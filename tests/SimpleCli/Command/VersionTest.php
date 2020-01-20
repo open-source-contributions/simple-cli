@@ -15,7 +15,7 @@ class VersionTest extends TestCase
      */
     public function testRun()
     {
-        static::assertOutput(
+        self::assertOutput(
             "[ESCAPE][0;33munknown[ESCAPE][0m\n",
             function () {
                 $command = new DemoCli();
