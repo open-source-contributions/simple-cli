@@ -12,8 +12,8 @@ use SimpleCli\SimpleCli;
  */
 class DemoCommand implements Command
 {
-    use Verbose, Help;
-
+    use Verbose;
+    use Help;
     /**
      * @option
      * @values hello, hi, bye
